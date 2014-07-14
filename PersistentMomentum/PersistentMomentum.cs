@@ -38,11 +38,18 @@ namespace PersistentMomentum
 
         private void Start()
         {
-            if (!hasLoadedEvents)
+            try
             {
-                GameEvents.onVesselGoOnRails.Add(this.OnRails);
-                GameEvents.onVesselGoOffRails.Add(this.OffRails);
-                hasLoadedEvents = true;
+                if (!hasLoadedEvents)
+                {
+                    GameEvents.onVesselGoOnRails.Add(this.OnRails);
+                    GameEvents.onVesselGoOffRails.Add(this.OffRails);
+                    hasLoadedEvents = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
             }
         }
 

@@ -65,10 +65,19 @@ namespace PersistentMomentum
 
         public override void OnUpdate()
         {
-            if (!this.onRails && this.part.physicalSignificance == Part.PhysicalSignificance.FULL)
+            try
             {
-                this.AngularVelocity = this.rigidbody.angularVelocity;
-                this.Velocity = this.rigidbody.velocity;
+
+
+                if (!this.onRails && this.part.physicalSignificance == Part.PhysicalSignificance.FULL)
+                {
+                    this.AngularVelocity = this.rigidbody.angularVelocity;
+                    this.Velocity = this.rigidbody.velocity;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
             }
         }
 

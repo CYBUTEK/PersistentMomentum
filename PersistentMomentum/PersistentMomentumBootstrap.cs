@@ -17,6 +17,8 @@
 
 #region Using Directives
 
+using System;
+
 using UnityEngine;
 
 #endregion
@@ -28,10 +30,17 @@ namespace PersistentMomentum
     {
         private void Start()
         {
-            foreach (var node in GameDatabase.Instance.GetConfigNodes("PART"))
+            try
             {
-                node.AddNode("MODULE").AddValue("name", "PersistentMomentumModule");
-                Logger.Log("Added Module to " + node.GetValue("name"));
+                foreach (var node in GameDatabase.Instance.GetConfigNodes("PART"))
+                {
+                    node.AddNode("MODULE").AddValue("name", "PersistentMomentumModule");
+                    Logger.Log("Added Module to " + node.GetValue("name"));
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex);
             }
         }
     }
